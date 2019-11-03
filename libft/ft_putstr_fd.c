@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrameau <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oldurosi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/28 22:23:42 by jrameau           #+#    #+#             */
-/*   Updated: 2016/09/28 22:23:43 by jrameau          ###   ########.fr       */
+/*   Created: 2019/10/11 20:27:17 by oldurosi          #+#    #+#             */
+/*   Updated: 2019/10/15 03:54:45 by oldurosi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	while (s && *s)
-		ft_putchar_fd(*s++, fd);
+	int i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i++], 1);
+	}
 }

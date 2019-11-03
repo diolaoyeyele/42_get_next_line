@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oldurosi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/20 15:17:49 by oldurosi          #+#    #+#             */
-/*   Updated: 2019/10/15 19:15:52 by oldurosi         ###   ########.fr       */
+/*   Created: 2019/10/10 23:50:33 by oldurosi          #+#    #+#             */
+/*   Updated: 2019/10/13 23:27:39 by oldurosi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <string.h>
 
-char	*ft_strtrim(char const *s)
+size_t	ft_nbrlen(int nbr)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	int len;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s[i] && ft_iswspace(s[i]))
-		i += 1;
-	j = ft_strlen(&s[i]) - 1;
-	while (s[i] && ft_iswspace(s[j + i]))
-		j -= 1;
-	if (!(str = ft_strnew(j + 1)))
-		return (NULL);
-	ft_strncpy(str, (s + i), (j + 1));
-	return (str);
+	len = 0;
+	if (nbr == 0)
+		return (1);
+	if (nbr < len)
+		len++;
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		len++;
+	}
+	return (len);
 }

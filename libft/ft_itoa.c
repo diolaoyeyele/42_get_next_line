@@ -3,44 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrameau <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oldurosi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/28 02:04:57 by jrameau           #+#    #+#             */
-/*   Updated: 2016/09/28 02:04:59 by jrameau          ###   ########.fr       */
+/*   Created: 2019/10/10 04:54:23 by oldurosi          #+#    #+#             */
+/*   Updated: 2019/10/16 01:08:41 by oldurosi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
+#include <string.h>
 
-static size_t	get_str_len(int n)
+char	*ft_itoa(int n)
 {
-	size_t		i;
+	size_t	i;
+	size_t	n_size;
+	char	*str;
 
-	i = 1;
-	while (n /= 10)
-		i++;
-	return (i);
-}
-
-char			*ft_itoa(int n)
-{
-	char			*str;
-	size_t			str_len;
-	unsigned int	n_cpy;
-
-	str_len = get_str_len(n);
-	n_cpy = n;
+	i = 0;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	n_size = ft_nbrlen(n);
+	str = (char *)malloc(sizeof(char) * (n_size + 1));
+	if (str == 0)
+		return (0);
+	str[n_size] = 0;
 	if (n < 0)
 	{
-		n_cpy = -n;
-		str_len++;
+		str[0] = '-';
+		n *= -1;
+		i += 1;
 	}
-	if (!(str = ft_strnew(str_len)))
-		return (NULL);
-	str[--str_len] = n_cpy % 10 + '0';
-	while (n_cpy /= 10)
-		str[--str_len] = n_cpy % 10 + '0';
-	if (n < 0)
-		*(str + 0) = '-';
+	while (i < n_size--)
+	{
+		str[n_size] = (n % 10) + '0';
+		n /= 10;
+	}
 	return (str);
 }
